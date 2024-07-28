@@ -4,7 +4,7 @@
 # License           : MIT license <Check LICENSE>
 # Author            : Anderson Ignacio da Silva (aignacio) <anderson@aignacio.com>
 # Date              : 12.07.2023
-# Last Modified Date: 04.11.2023
+# Last Modified Date: 27.07.2024
 import random
 import cocotb
 import os
@@ -44,7 +44,7 @@ def test_basic():
         cfg.TESTS_DIR, f"../run_dir/sim_build_{cfg.SIMULATOR}_{module}"
     )
     extra_args_sim = cfg.EXTRA_ARGS
-
+    print(cfg.VERILOG_SOURCES)
     run(
         python_search=[cfg.TESTS_DIR],
         includes=cfg.INC_DIR,

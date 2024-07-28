@@ -1,0 +1,6 @@
+[submodule "skid_buffer"]
+	path = skid_buffer
+	url = https://github.com/aignacio/skid_buffer.git
+[submodule "bus_arch_sv_pkg"]
+	path = bus_arch_sv_pkg
+	url = https://github.com/aignacio/bus_arch_sv_pkg.git

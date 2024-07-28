@@ -4,7 +4,7 @@
 # License           : MIT license <Check LICENSE>
 # Author            : Anderson Ignacio da Silva (aignacio) <anderson@aignacio.com>
 # Date              : 12.07.2023
-# Last Modified Date: 04.11.2023
+# Last Modified Date: 27.07.2024
 import os
 import glob
 
@@ -19,12 +19,16 @@ class cfg:
     SIMULATOR = str(os.getenv("SIM"))
 
     TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
-    INC_DIR = [os.path.join(TESTS_DIR, "../../rtl/include")]
+    INC_DIR = [os.path.join(TESTS_DIR, "../../bus_arch_sv_pkg")]
     RTL_DIR = os.path.join(TESTS_DIR, "../../rtl")
+    SKID_DIR = os.path.join(TESTS_DIR, "../../skid_buffer/rtl")
+    BUS_PKG_DIR = os.path.join(TESTS_DIR, "../../bus_arch_sv_pkg")
 
     VERILOG_SOURCES = []  # The sequence below is important...
-    VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{RTL_DIR}/*.sv", recursive=True)
+    VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{BUS_PKG_DIR}/*.sv", recursive=True)
     VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{RTL_DIR}/*.v", recursive=True)
+    VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{RTL_DIR}/*.sv", recursive=True)
+    VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{SKID_DIR}/*.sv", recursive=True)
 
     EXTRA_ENV = {}
     EXTRA_ENV["COCOTB_HDL_TIMEPRECISION"] = os.getenv("TIMEPREC")
