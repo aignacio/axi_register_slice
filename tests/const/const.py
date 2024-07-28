@@ -4,7 +4,7 @@
 # License           : MIT license <Check LICENSE>
 # Author            : Anderson Ignacio da Silva (aignacio) <anderson@aignacio.com>
 # Date              : 12.07.2023
-# Last Modified Date: 27.07.2024
+# Last Modified Date: 28.07.2024
 import os
 import glob
 
@@ -23,12 +23,14 @@ class cfg:
     RTL_DIR = os.path.join(TESTS_DIR, "../../rtl")
     SKID_DIR = os.path.join(TESTS_DIR, "../../skid_buffer/rtl")
     BUS_PKG_DIR = os.path.join(TESTS_DIR, "../../bus_arch_sv_pkg")
+    TB_DIR = os.path.join(TESTS_DIR, "../../tests")
 
     VERILOG_SOURCES = []  # The sequence below is important...
     VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{BUS_PKG_DIR}/*.sv", recursive=True)
     VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{RTL_DIR}/*.v", recursive=True)
     VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{RTL_DIR}/*.sv", recursive=True)
     VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{SKID_DIR}/*.sv", recursive=True)
+    VERILOG_SOURCES = VERILOG_SOURCES + glob.glob(f"{TB_DIR}/*.sv", recursive=True)
 
     EXTRA_ENV = {}
     EXTRA_ENV["COCOTB_HDL_TIMEPRECISION"] = os.getenv("TIMEPREC")
@@ -37,13 +39,15 @@ class cfg:
 
     if SIMULATOR == "verilator":
         EXTRA_ARGS = [
+            "--trace",
             "--trace-fst",
+            "--trace-structs",
             "--coverage",
             "--coverage-line",
             "--coverage-toggle",
-            "--trace-structs",
             "--Wno-UNOPTFLAT",
-            "--Wno-REDEFMACRO",
+            "--Wno-REDEFMACRO"
         ]
+        PLUS_ARGS = ["--trace"]
     else:
         EXTRA_ARGS = []
