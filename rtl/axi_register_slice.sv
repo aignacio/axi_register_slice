@@ -70,9 +70,9 @@ module axi_register_slice
   logic [AR_CHN_WIDTH-1:0] in_ar_ch, out_ar_ch;
 
   typedef struct packed {
-    logic [NUM_PIP_AR:0][AR_CHN_WIDTH-1:0] data;
-    logic                                  valid;
-    logic                                  ready;
+    logic [AR_CHN_WIDTH-1:0] data;
+    logic                    valid;
+    logic                    ready;
   } s_ar_stage_t;
 
   assign in_ar_ch = {
@@ -118,7 +118,7 @@ module axi_register_slice
               master_mosi_o.aruser} = out_ar_ch;
     end
     else begin
-      s_ar_stage_t ar_stages;
+      s_ar_stage_t [NUM_PIP_AR-1:0] ar_stages;
 
       for (genvar ar_idx = 0; ar_idx < NUM_PIP_AR; ar_idx++) begin
         if (ar_idx == 0) begin : ar_first_stage
@@ -143,9 +143,9 @@ module axi_register_slice
           ) u_ar_pip (
             .clk          (clk),
             .rst          (arst),
-            .in_valid_i   (ar_stages[ar_idx-1]),
-            .in_ready_o   (ar_stages[ar_idx-1]),
-            .in_data_i    (ar_stages[ar_idx-1]),
+            .in_valid_i   (ar_stages[ar_idx-1].valid),
+            .in_ready_o   (ar_stages[ar_idx-1].ready),
+            .in_data_i    (ar_stages[ar_idx-1].data),
             .out_valid_o  (ar_stages[ar_idx].valid),
             .out_ready_i  (ar_stages[ar_idx].ready),
             .out_data_o   (ar_stages[ar_idx].data)
@@ -190,9 +190,9 @@ module axi_register_slice
   logic [AW_CHN_WIDTH-1:0] in_aw_ch, out_aw_ch;
 
   typedef struct packed {
-    logic [NUM_PIP_AW:0][AW_CHN_WIDTH-1:0] data;
-    logic                                  valid;
-    logic                                  ready;
+    logic [AW_CHN_WIDTH-1:0] data;
+    logic                    valid;
+    logic                    ready;
   } s_aw_stage_t;
 
   assign in_aw_ch = {
@@ -238,7 +238,7 @@ module axi_register_slice
               master_mosi_o.awuser} = out_aw_ch;
     end
     else begin
-      s_aw_stage_t aw_stages;
+      s_aw_stage_t [NUM_PIP_AW-1:0] aw_stages;
 
       for (genvar aw_idx = 0; aw_idx < NUM_PIP_AW; aw_idx++) begin
         if (aw_idx == 0) begin : aw_first_stage
@@ -263,9 +263,9 @@ module axi_register_slice
           ) u_aw_pip (
             .clk          (clk),
             .rst          (arst),
-            .in_valid_i   (aw_stages[aw_idx-1]),
-            .in_ready_o   (aw_stages[aw_idx-1]),
-            .in_data_i    (aw_stages[aw_idx-1]),
+            .in_valid_i   (aw_stages[aw_idx-1].valid),
+            .in_ready_o   (aw_stages[aw_idx-1].ready),
+            .in_data_i    (aw_stages[aw_idx-1].data),
             .out_valid_o  (aw_stages[aw_idx].valid),
             .out_ready_i  (aw_stages[aw_idx].ready),
             .out_data_o   (aw_stages[aw_idx].data)
@@ -310,9 +310,9 @@ module axi_register_slice
   logic [W_CHN_WIDTH-1:0] in_w_ch, out_w_ch;
 
   typedef struct packed {
-    logic [NUM_PIP_W:0][W_CHN_WIDTH-1:0] data;
-    logic                                valid;
-    logic                                ready;
+    logic [W_CHN_WIDTH-1:0] data;
+    logic                   valid;
+    logic                   ready;
   } s_w_stage_t;
 
   assign in_w_ch = {
@@ -344,7 +344,7 @@ module axi_register_slice
               master_mosi_o.wuser} = out_w_ch;
     end
     else begin
-      s_w_stage_t w_stages;
+      s_w_stage_t [NUM_PIP_W-1:0] w_stages;
 
       for (genvar w_idx = 0; w_idx < NUM_PIP_W; w_idx++) begin
         if (w_idx == 0) begin : w_first_stage
@@ -369,9 +369,9 @@ module axi_register_slice
           ) u_w_pip (
             .clk          (clk),
             .rst          (arst),
-            .in_valid_i   (w_stages[w_idx-1]),
-            .in_ready_o   (w_stages[w_idx-1]),
-            .in_data_i    (w_stages[w_idx-1]),
+            .in_valid_i   (w_stages[w_idx-1].valid),
+            .in_ready_o   (w_stages[w_idx-1].ready),
+            .in_data_i    (w_stages[w_idx-1].data),
             .out_valid_o  (w_stages[w_idx].valid),
             .out_ready_i  (w_stages[w_idx].ready),
             .out_data_o   (w_stages[w_idx].data)
@@ -409,9 +409,9 @@ module axi_register_slice
   logic [R_CHN_WIDTH-1:0] in_r_ch, out_r_ch;
 
   typedef struct packed {
-    logic [NUM_PIP_R:0][R_CHN_WIDTH-1:0] data;
-    logic                                valid;
-    logic                                ready;
+    logic [R_CHN_WIDTH-1:0] data;
+    logic                   valid;
+    logic                   ready;
   } s_r_stage_t;
 
   assign in_r_ch = {
@@ -443,7 +443,7 @@ module axi_register_slice
               slave_miso_o.rlast} = out_r_ch;
     end
     else begin
-      s_r_stage_t r_stages;
+      s_r_stage_t [NUM_PIP_R-1:0] r_stages;
 
       for (genvar r_idx = 0; r_idx < NUM_PIP_R; r_idx++) begin
         if (r_idx == 0) begin : r_first_stage
@@ -463,14 +463,14 @@ module axi_register_slice
         end : r_first_stage
         else if (r_idx == (NUM_PIP_R-1)) begin : r_last_stage
           skid_buffer #(
-            .DATA_WIDTH(W_CHN_WIDTH),
+            .DATA_WIDTH(R_CHN_WIDTH),
             .REG_OUTPUT(1)
           ) u_r_pip (
             .clk          (clk),
             .rst          (arst),
-            .in_valid_i   (r_stages[r_idx-1]),
-            .in_ready_o   (r_stages[r_idx-1]),
-            .in_data_i    (r_stages[r_idx-1]),
+            .in_valid_i   (r_stages[r_idx-1].valid),
+            .in_ready_o   (r_stages[r_idx-1].ready),
+            .in_data_i    (r_stages[r_idx-1].data),
             .out_valid_o  (r_stages[r_idx].valid),
             .out_ready_i  (r_stages[r_idx].ready),
             .out_data_o   (r_stages[r_idx].data)
@@ -478,7 +478,8 @@ module axi_register_slice
 
           assign {slave_miso_o.rid,
                   slave_miso_o.rdata,
-                  slave_miso_o.rresp} = r_stages[r_idx].data;
+                  slave_miso_o.rresp,
+                  slave_miso_o.rlast} = r_stages[r_idx].data;
           assign slave_miso_o.rvalid = r_stages[r_idx].valid;
           assign r_stages[r_idx].ready = slave_mosi_i.rready;
         end : r_last_stage
@@ -507,9 +508,9 @@ module axi_register_slice
   logic [B_CHN_WIDTH-1:0] in_b_ch, out_b_ch;
 
   typedef struct packed {
-    logic [NUM_PIP_B:0][B_CHN_WIDTH-1:0] data;
-    logic                                valid;
-    logic                                ready;
+    logic [B_CHN_WIDTH-1:0] data;
+    logic                   valid;
+    logic                   ready;
   } s_b_stage_t;
 
   assign in_b_ch = {
@@ -537,7 +538,7 @@ module axi_register_slice
               slave_miso_o.bresp} = out_b_ch;
     end
     else begin
-      s_b_stage_t b_stages;
+      s_b_stage_t [NUM_PIP_B-1:0] b_stages;
 
       for (genvar b_idx = 0; b_idx < NUM_PIP_B; b_idx++) begin
         if (b_idx == 0) begin : b_first_stage
@@ -562,9 +563,9 @@ module axi_register_slice
           ) u_b_pip (
             .clk          (clk),
             .rst          (arst),
-            .in_valid_i   (b_stages[b_idx-1]),
-            .in_ready_o   (b_stages[b_idx-1]),
-            .in_data_i    (b_stages[b_idx-1]),
+            .in_valid_i   (b_stages[b_idx-1].valid),
+            .in_ready_o   (b_stages[b_idx-1].ready),
+            .in_data_i    (b_stages[b_idx-1].data),
             .out_valid_o  (b_stages[b_idx].valid),
             .out_ready_i  (b_stages[b_idx].ready),
             .out_data_o   (b_stages[b_idx].data)

@@ -3,16 +3,16 @@
  * License           : MIT license <Check LICENSE>
  * Author            : Anderson I. da Silva (aignacio) <anderson@aignacio.com>
  * Date              : 28.07.2024
- * Last Modified Date: 28.07.2024
+ * Last Modified Date: 29.07.2024
  */
 module axi_register_slice_tb
   import amba_axi_pkg::*;
 #(
-  parameter NUM_PIP_AW = 0, // [AW] Number of pipeline registers
-  parameter NUM_PIP_AR = 0, // [AR] Number of pipeline registers
-  parameter NUM_PIP_W  = 0, // [W]  Number of pipeline registers
-  parameter NUM_PIP_R  = 0, // [R]  Number of pipeline registers
-  parameter NUM_PIP_B  = 0  // [B]  Number of pipeline registers
+  parameter NUM_PIP_AW = 5, // [AW] Number of pipeline registers
+  parameter NUM_PIP_AR = 5, // [AR] Number of pipeline registers
+  parameter NUM_PIP_W  = 5, // [W]  Number of pipeline registers
+  parameter NUM_PIP_R  = 5, // [R]  Number of pipeline registers
+  parameter NUM_PIP_B  = 5  // [B]  Number of pipeline registers
 
 )(
   input                                          clk,
@@ -121,7 +121,7 @@ module axi_register_slice_tb
   // Write Response channel
   input  axi_tid_t                               master_bid,
   input  axi_resp_t                              master_bresp,
-  input  logic        [`AXI_USER_RESP_WIDTH-1:0] master_buser,
+  input  axi_user_req_t                          master_buser,
   input  logic                                   master_bvalid,
   // Read addr channel
   input  logic                                   master_arready,
