@@ -3,7 +3,7 @@
  * License           : MIT license <Check LICENSE>
  * Author            : Anderson I. da Silva (aignacio) <anderson@aignacio.com>
  * Date              : 04.11.2023
- * Last Modified Date: 28.07.2024
+ * Last Modified Date: 29.07.2024
  */
 module axi_register_slice
   import amba_axi_pkg::*;
@@ -56,7 +56,8 @@ module axi_register_slice
 
   localparam R_CHN_WIDTH = $bits({  slave_miso_o.rid,
                                     slave_miso_o.rdata,
-                                    slave_miso_o.rresp
+                                    slave_miso_o.rresp,
+                                    slave_miso_o.rlast
   });
 
   localparam B_CHN_WIDTH = $bits({  slave_miso_o.bid,
@@ -416,7 +417,8 @@ module axi_register_slice
   assign in_r_ch = {
     master_miso_i.rid,
     master_miso_i.rdata,
-    master_miso_i.rresp
+    master_miso_i.rresp,
+    master_miso_i.rlast
   };
 
   generate
@@ -437,7 +439,8 @@ module axi_register_slice
 
       assign {slave_miso_o.rid,
               slave_miso_o.rdata,
-              slave_miso_o.rresp} = out_r_ch;
+              slave_miso_o.rresp,
+              slave_miso_o.rlast} = out_r_ch;
     end
     else begin
       s_r_stage_t r_stages;

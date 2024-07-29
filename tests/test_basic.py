@@ -4,7 +4,7 @@
 # License           : MIT license <Check LICENSE>
 # Author            : Anderson Ignacio da Silva (aignacio) <anderson@aignacio.com>
 # Date              : 12.07.2023
-# Last Modified Date: 28.07.2024
+# Last Modified Date: 29.07.2024
 import random
 import cocotb
 import os
@@ -36,8 +36,8 @@ async def run_test(dut):
     axi_master = AxiMaster(AxiBus.from_prefix(dut, "slave"), dut.clk, dut.arst)
     axi_ram = AxiRam(AxiBus.from_prefix(dut, "master"), dut.clk, dut.arst, size=ram_size)
 
-    # await axi_master.write(0x0000, b'test')
-    # data = await axi_master.read(0x0000, 4)
+    await axi_master.write(0x0000, b'test')
+    data = await axi_master.read(0x0000, 4)
 
 def test_basic():
     """
