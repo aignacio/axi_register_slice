@@ -1,10 +1,4 @@
-/**
- * File              : axi_register_slice.sv
- * License           : MIT license <Check LICENSE>
- * Author            : Anderson I. da Silva (aignacio) <anderson@aignacio.com>
- * Date              : 04.11.2023
- * Last Modified Date: 29.07.2024
- */
+
 module axi_register_slice
   import amba_axi_pkg::*;
 #(
@@ -92,7 +86,7 @@ module axi_register_slice
   generate
     if (NUM_PIP_AR <= 1) begin
       skid_buffer #(
-        .DATA_WIDTH(AR_CHN_WIDTH),
+        .type_t       (logic [AR_CHN_WIDTH-1:0]),
         .REG_OUTPUT(NUM_PIP_AR)
       ) u_ar_pip (
         .clk          (clk),
@@ -123,7 +117,7 @@ module axi_register_slice
       for (genvar ar_idx = 0; ar_idx < NUM_PIP_AR; ar_idx++) begin
         if (ar_idx == 0) begin : ar_first_stage
           skid_buffer #(
-            .DATA_WIDTH(AR_CHN_WIDTH),
+            .type_t       (logic [AR_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_ar_pip (
             .clk          (clk),
@@ -138,7 +132,7 @@ module axi_register_slice
         end : ar_first_stage
         else if (ar_idx == (NUM_PIP_AR-1)) begin : ar_last_stage
           skid_buffer #(
-            .DATA_WIDTH(AR_CHN_WIDTH),
+            .type_t       (logic [AR_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_ar_pip (
             .clk          (clk),
@@ -167,7 +161,7 @@ module axi_register_slice
         end : ar_last_stage
         else begin : ar_mid_stage
           skid_buffer #(
-            .DATA_WIDTH(AR_CHN_WIDTH),
+            .type_t       (logic [AR_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_ar_pip (
             .clk          (clk),
@@ -212,7 +206,7 @@ module axi_register_slice
   generate
     if (NUM_PIP_AW <= 1) begin
       skid_buffer #(
-        .DATA_WIDTH(AW_CHN_WIDTH),
+        .type_t       (logic [AW_CHN_WIDTH-1:0]),
         .REG_OUTPUT(NUM_PIP_AW)
       ) u_aw_pip (
         .clk          (clk),
@@ -243,7 +237,7 @@ module axi_register_slice
       for (genvar aw_idx = 0; aw_idx < NUM_PIP_AW; aw_idx++) begin
         if (aw_idx == 0) begin : aw_first_stage
           skid_buffer #(
-            .DATA_WIDTH(AW_CHN_WIDTH),
+            .type_t       (logic [AW_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_aw_pip (
             .clk          (clk),
@@ -258,7 +252,7 @@ module axi_register_slice
         end : aw_first_stage
         else if (aw_idx == (NUM_PIP_AW-1)) begin : aw_last_stage
           skid_buffer #(
-            .DATA_WIDTH(AW_CHN_WIDTH),
+            .type_t       (logic [AW_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_aw_pip (
             .clk          (clk),
@@ -287,7 +281,7 @@ module axi_register_slice
         end : aw_last_stage
         else begin : aw_mid_stage
           skid_buffer #(
-            .DATA_WIDTH(AW_CHN_WIDTH),
+            .type_t       (logic [AW_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_aw_pip (
             .clk          (clk),
@@ -325,7 +319,7 @@ module axi_register_slice
   generate
     if (NUM_PIP_W <= 1) begin
       skid_buffer #(
-        .DATA_WIDTH(W_CHN_WIDTH),
+        .type_t       (logic [W_CHN_WIDTH-1:0]),
         .REG_OUTPUT(NUM_PIP_W)
       ) u_aw_pip (
         .clk          (clk),
@@ -349,7 +343,7 @@ module axi_register_slice
       for (genvar w_idx = 0; w_idx < NUM_PIP_W; w_idx++) begin
         if (w_idx == 0) begin : w_first_stage
           skid_buffer #(
-            .DATA_WIDTH(W_CHN_WIDTH),
+            .type_t       (logic [W_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_w_pip (
             .clk          (clk),
@@ -364,7 +358,7 @@ module axi_register_slice
         end : w_first_stage
         else if (w_idx == (NUM_PIP_W-1)) begin : w_last_stage
           skid_buffer #(
-            .DATA_WIDTH(W_CHN_WIDTH),
+            .type_t       (logic [W_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_w_pip (
             .clk          (clk),
@@ -386,7 +380,7 @@ module axi_register_slice
         end : w_last_stage
         else begin : w_mid_stage
           skid_buffer #(
-            .DATA_WIDTH(W_CHN_WIDTH),
+            .type_t       (logic [W_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_w_pip (
             .clk          (clk),
@@ -424,7 +418,7 @@ module axi_register_slice
   generate
     if (NUM_PIP_R <= 1) begin
       skid_buffer #(
-        .DATA_WIDTH(R_CHN_WIDTH),
+        .type_t       (logic [R_CHN_WIDTH-1:0]),
         .REG_OUTPUT(NUM_PIP_R)
       ) u_r_pip (
         .clk          (clk),
@@ -448,7 +442,7 @@ module axi_register_slice
       for (genvar r_idx = 0; r_idx < NUM_PIP_R; r_idx++) begin
         if (r_idx == 0) begin : r_first_stage
           skid_buffer #(
-            .DATA_WIDTH(R_CHN_WIDTH),
+            .type_t       (logic [R_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_r_pip (
             .clk          (clk),
@@ -463,7 +457,7 @@ module axi_register_slice
         end : r_first_stage
         else if (r_idx == (NUM_PIP_R-1)) begin : r_last_stage
           skid_buffer #(
-            .DATA_WIDTH(R_CHN_WIDTH),
+            .type_t       (logic [R_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_r_pip (
             .clk          (clk),
@@ -485,7 +479,7 @@ module axi_register_slice
         end : r_last_stage
         else begin : r_mid_stage
           skid_buffer #(
-            .DATA_WIDTH(R_CHN_WIDTH),
+            .type_t       (logic [R_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_r_pip (
             .clk          (clk),
@@ -521,7 +515,7 @@ module axi_register_slice
   generate
     if (NUM_PIP_B <= 1) begin
       skid_buffer #(
-        .DATA_WIDTH(B_CHN_WIDTH),
+        .type_t       (logic [B_CHN_WIDTH-1:0]),
         .REG_OUTPUT(NUM_PIP_B)
       ) u_b_pip (
         .clk          (clk),
@@ -543,7 +537,7 @@ module axi_register_slice
       for (genvar b_idx = 0; b_idx < NUM_PIP_B; b_idx++) begin
         if (b_idx == 0) begin : b_first_stage
           skid_buffer #(
-            .DATA_WIDTH(B_CHN_WIDTH),
+            .type_t       (logic [B_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_b_pip (
             .clk          (clk),
@@ -558,7 +552,7 @@ module axi_register_slice
         end : b_first_stage
         else if (b_idx == (NUM_PIP_B-1)) begin : b_last_stage
           skid_buffer #(
-            .DATA_WIDTH(B_CHN_WIDTH),
+            .type_t       (logic [B_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_b_pip (
             .clk          (clk),
@@ -578,7 +572,7 @@ module axi_register_slice
         end : b_last_stage
         else begin : b_mid_stage
           skid_buffer #(
-            .DATA_WIDTH(B_CHN_WIDTH),
+            .type_t       (logic [B_CHN_WIDTH-1:0]),
             .REG_OUTPUT(1)
           ) u_b_pip (
             .clk          (clk),
