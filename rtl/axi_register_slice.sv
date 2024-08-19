@@ -1,4 +1,3 @@
-
 module axi_register_slice
   import amba_axi_pkg::*;
 #(

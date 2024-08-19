@@ -4,7 +4,7 @@
 # License           : MIT license <Check LICENSE>
 # Author            : Anderson Ignacio da Silva (aignacio) <anderson@aignacio.com>
 # Date              : 12.07.2023
-# Last Modified Date: 29.07.2024
+# Last Modified Date: 19.08.2024
 import random
 import cocotb
 import os
@@ -21,6 +21,7 @@ from cocotb.regression import TestFactory
 from cocotb.result import TestFailure
 from cocotbext.axi import AxiBus, AxiMaster, AxiRam, AxiResp
 
+
 async def setup_dut(dut, cycles):
     cocotb.start_soon(Clock(dut.clk, *cfg.CLK_100MHz).start())
     dut.arst.value = 1
@@ -32,16 +33,26 @@ async def setup_dut(dut, cycles):
 async def run_test(dut):
     await setup_dut(dut, cfg.RST_CYCLES)
 
-    ram_size=(2**12)
+    n = 100
+    ram_size = 2**12
     axi_master = AxiMaster(AxiBus.from_prefix(dut, "slave"), dut.clk, dut.arst)
-    axi_ram = AxiRam(AxiBus.from_prefix(dut, "master"), dut.clk, dut.arst, size=ram_size)
+    axi_ram = AxiRam(
+        AxiBus.from_prefix(dut, "master"), dut.clk, dut.arst, size=ram_size
+    )
 
-    await axi_master.write(0x0000, b'test')
-    data = await axi_master.read(0x0000, 4)
+    addr = [random.randint(0, ram_size - 1) for _ in range(n)]
+    data = [random.randint(0, (2**32 - 1)) for _ in range(n)]
+
+    for addr, data in zip(addr, data):
+        await axi_master.write(addr, bytearray(data.to_bytes(4, byteorder="little")))
+        rdata = await axi_master.read(addr, 4)
+        print(rdata)
+        assert rdata.data == axi_ram.read(addr, 4), "Mismatch between data"
+
 
 def test_basic():
     """
-    Basic test to check the DUT
+    Dispatch few AXI txns through register slice bridge to AXI RAM
 
     Test ID: 1
     """
@@ -62,5 +73,5 @@ def test_basic():
         sim_build=SIM_BUILD,
         extra_args=extra_args_sim,
         plus_args=plus_args_sim,
-        waves=1
+        waves=1,
     )
