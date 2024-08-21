@@ -4,12 +4,13 @@
 # License           : MIT license <Check LICENSE>
 # Author            : Anderson Ignacio da Silva (aignacio) <anderson@aignacio.com>
 # Date              : 12.07.2023
-# Last Modified Date: 19.08.2024
+# Last Modified Date: 21.08.2024
 import random
 import cocotb
 import os
 import logging
 import pytest
+import copy
 
 from random import randrange
 from const.const import cfg
@@ -19,7 +20,7 @@ from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge
 from cocotb.regression import TestFactory
 from cocotb.result import TestFailure
-from cocotbext.axi import AxiBus, AxiMaster, AxiRam, AxiResp
+from cocotbext.axi import AxiBus, AxiMaster, AxiSlave, AxiRam, AxiResp
 
 
 async def setup_dut(dut, cycles):
@@ -33,20 +34,21 @@ async def setup_dut(dut, cycles):
 async def run_test(dut):
     await setup_dut(dut, cfg.RST_CYCLES)
 
-    n = 100
+    n = 1000
     ram_size = 2**12
     axi_master = AxiMaster(AxiBus.from_prefix(dut, "slave"), dut.clk, dut.arst)
     axi_ram = AxiRam(
         AxiBus.from_prefix(dut, "master"), dut.clk, dut.arst, size=ram_size
     )
 
-    addr = [random.randint(0, ram_size - 1) for _ in range(n)]
+    addr = [random.randint(0, ram_size - 1) & 0xFFFFFFFC for _ in range(n)]
     data = [random.randint(0, (2**32 - 1)) for _ in range(n)]
 
     for addr, data in zip(addr, data):
-        await axi_master.write(addr, bytearray(data.to_bytes(4, byteorder="little")))
+        await axi_master.write(
+            addr, bytearray(data.to_bytes(4, byteorder="little")), size=2
+        )
         rdata = await axi_master.read(addr, 4)
-        print(rdata)
         assert rdata.data == axi_ram.read(addr, 4), "Mismatch between data"
 
 

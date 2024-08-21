@@ -1,20 +1,46 @@
 [*]
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Sun Jul 28 23:41:10 2024
+[*] Wed Aug 21 18:34:26 2024
 [*]
 [dumpfile] "./run_dir/sim_build_verilator_test_basic/dump.fst"
-[dumpfile_mtime] "Sun Jul 28 19:52:34 2024"
-[dumpfile_size] 3369
+[dumpfile_mtime] "Wed Aug 21 18:30:11 2024"
+[dumpfile_size] 6215
 [savefile] "/Users/aignacio/projects/axi_register_slice/template.gtkw"
 [timestart] 0
-[size] 1440 900
-[pos] -1 -26
-*-12.111534 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[size] 2320 1475
+[pos] -1 -1
+*-16.611534 240000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[markername] AA
+[markername] BB
+[markername] CC
+[markername] DD
+[markername] EE
+[markername] FF
+[markername] GG
+[markername] HH
+[markername] II
+[markername] JJ
+[markername] KK
+[markername] LL
+[markername] MM
+[markername] NN
+[markername] OO
+[markername] PP
+[markername] QQ
+[markername] RR
+[markername] SS
+[markername] TT
+[markername] UU
+[markername] VV
+[markername] WW
+[markername] XX
+[markername] YY
+[markername] ZZ
 [treeopen] .
 [sst_width] 253
-[signals_width] 185
+[signals_width] 292
 [sst_expanded] 1
-[sst_vpaned_height] 264
+[sst_vpaned_height] 464
 @420
 axi_register_slice_tb.NUM_PIP_AR
 axi_register_slice_tb.NUM_PIP_AW
@@ -27,19 +53,111 @@ axi_register_slice_tb.clk
 @200
 -Slave_in
 @22
+[color] 7
 axi_register_slice_tb.slave_araddr[31:0]
+[color] 7
 axi_register_slice_tb.slave_arid[7:0]
+[color] 7
 axi_register_slice_tb.slave_arlen[7:0]
 @28
+[color] 7
 axi_register_slice_tb.slave_arready
 @100000028
+[color] 7
 axi_register_slice_tb.slave_arsize[2:0]
 @28
+[color] 7
 axi_register_slice_tb.slave_arvalid
 @100000028
+[color] 7
 axi_register_slice_tb.slave_arsize[2:0]
 @28
+[color] 7
 axi_register_slice_tb.slave_arvalid
+@22
+[color] 7
+axi_register_slice_tb.slave_rid[7:0]
+@28
+[color] 7
+axi_register_slice_tb.slave_rlast
+[color] 7
+axi_register_slice_tb.slave_rready
+@100000028
+[color] 7
+axi_register_slice_tb.slave_rresp[1:0]
+@28
+[color] 7
+axi_register_slice_tb.slave_rvalid
+@c00023
+[color] 7
+axi_register_slice_tb.slave_rdata[31:0]
+@29
+[color] 7
+(0)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(1)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(2)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(3)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(4)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(5)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(6)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(7)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(8)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(9)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(10)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(11)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(12)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(13)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(14)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(15)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(16)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(17)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(18)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(19)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(20)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(21)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(22)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(23)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(24)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(25)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(26)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(27)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(28)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(29)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(30)axi_register_slice_tb.slave_rdata[31:0]
+[color] 7
+(31)axi_register_slice_tb.slave_rdata[31:0]
+@1401201
+-group_end
 @22
 axi_register_slice_tb.slave_awaddr[31:0]
 axi_register_slice_tb.slave_awid[7:0]
@@ -51,24 +169,6 @@ axi_register_slice_tb.slave_awsize[2:0]
 @28
 axi_register_slice_tb.slave_awvalid
 @22
-axi_register_slice_tb.slave_bid[7:0]
-@28
-axi_register_slice_tb.slave_bready
-@100000028
-axi_register_slice_tb.slave_bresp[1:0]
-@28
-axi_register_slice_tb.slave_bvalid
-@22
-axi_register_slice_tb.slave_rdata[31:0]
-axi_register_slice_tb.slave_rid[7:0]
-@28
-axi_register_slice_tb.slave_rlast
-axi_register_slice_tb.slave_rready
-@100000028
-axi_register_slice_tb.slave_rresp[1:0]
-@28
-axi_register_slice_tb.slave_rvalid
-@22
 axi_register_slice_tb.slave_wdata[31:0]
 @28
 axi_register_slice_tb.slave_wlast
@@ -77,22 +177,53 @@ axi_register_slice_tb.slave_wready
 axi_register_slice_tb.slave_wstrb[3:0]
 @28
 axi_register_slice_tb.slave_wvalid
-@201
+@22
+axi_register_slice_tb.slave_bid[7:0]
+@28
+axi_register_slice_tb.slave_bready
+@100000028
+axi_register_slice_tb.slave_bresp[1:0]
+@28
+axi_register_slice_tb.slave_bvalid
+@200
 -Master_out
 @22
+[color] 7
 axi_register_slice_tb.master_araddr[31:0]
 @100000028
+[color] 7
 axi_register_slice_tb.master_arburst[1:0]
 @22
+[color] 7
 axi_register_slice_tb.master_arid[7:0]
+[color] 7
 axi_register_slice_tb.master_arlen[7:0]
 @28
+[color] 7
 axi_register_slice_tb.master_arready
 @100000028
+[color] 7
 axi_register_slice_tb.master_arsize[2:0]
 @28
+[color] 7
 axi_register_slice_tb.master_arvalid
 @22
+[color] 7
+axi_register_slice_tb.master_rid[7:0]
+@28
+[color] 7
+axi_register_slice_tb.master_rlast
+[color] 7
+axi_register_slice_tb.master_rready
+@100000028
+[color] 7
+axi_register_slice_tb.master_rresp[1:0]
+@28
+[color] 7
+axi_register_slice_tb.master_rvalid
+@22
+[color] 7
+axi_register_slice_tb.master_rdata[31:0]
 axi_register_slice_tb.master_awaddr[31:0]
 axi_register_slice_tb.master_awid[7:0]
 axi_register_slice_tb.master_awlen[7:0]
@@ -103,24 +234,6 @@ axi_register_slice_tb.master_awsize[2:0]
 @28
 axi_register_slice_tb.master_awvalid
 @22
-axi_register_slice_tb.master_bid[7:0]
-@28
-axi_register_slice_tb.master_bready
-@100000028
-axi_register_slice_tb.master_bresp[1:0]
-@28
-axi_register_slice_tb.master_bvalid
-@22
-axi_register_slice_tb.master_rdata[31:0]
-axi_register_slice_tb.master_rid[7:0]
-@28
-axi_register_slice_tb.master_rlast
-axi_register_slice_tb.master_rready
-@100000028
-axi_register_slice_tb.master_rresp[1:0]
-@28
-axi_register_slice_tb.master_rvalid
-@22
 axi_register_slice_tb.master_wdata[31:0]
 @28
 axi_register_slice_tb.master_wlast
@@ -129,5 +242,13 @@ axi_register_slice_tb.master_wready
 axi_register_slice_tb.master_wstrb[3:0]
 @28
 axi_register_slice_tb.master_wvalid
+@22
+axi_register_slice_tb.master_bid[7:0]
+@28
+axi_register_slice_tb.master_bready
+@100000028
+axi_register_slice_tb.master_bresp[1:0]
+@28
+axi_register_slice_tb.master_bvalid
 [pattern_trace] 1
 [pattern_trace] 0
